@@ -1,0 +1,34 @@
+require "buildr/scala"
+
+GROUP = "org.ds"
+VERSION = "0.1"
+COPYRIGHT = "2011 Dan Simpson"
+
+
+####################
+# Dependencies
+####################
+CONFIGGY = "net.lag:configgy:jar:2.0.0"
+GRIZZLED = "org.clapper:grizzled-scala_2.8.1:jar:1.0.4"
+RHINO = "rhino:js:jar:1.7R2"
+YUI = "com.yahoo.platform.yui:yuicompressor:jar:2.4.6"
+
+repositories.remote << "http://repo1.maven.org/maven2/"
+
+####################
+# Repositories
+####################
+
+desc "satchel - asset packaging for scala"
+define "satchel" do
+
+  project.group = GROUP
+  project.version = VERSION
+  
+  manifest["Implementation-Vendor"] = COPYRIGHT
+
+  compile.with GRIZZLED, YUI, RHINO #transitive(YUI)
+
+  package :jar
+      
+end

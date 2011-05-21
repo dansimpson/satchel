@@ -1,0 +1,9 @@
+.scala_dependencies
+*.class
+target
+reports
+.settings
+.project
+logs
+*.classpath
+
