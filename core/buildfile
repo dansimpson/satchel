@@ -19,6 +19,8 @@ repositories.remote << "http://repo1.maven.org/maven2/"
 # Repositories
 ####################
 
+Java.classpath << "src/resources"
+
 desc "satchel - asset packaging for scala"
 define "satchel" do
 
@@ -27,7 +29,7 @@ define "satchel" do
   
   manifest["Implementation-Vendor"] = COPYRIGHT
 
-  compile.with GRIZZLED, YUI, RHINO #transitive(YUI)
+  compile.with GRIZZLED, transitive(YUI)
 
   package :jar
       
