@@ -6,4 +6,5 @@ reports
 .project
 logs
 *.classpath
+coffee-script.js
 

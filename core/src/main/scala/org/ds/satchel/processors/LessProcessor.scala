@@ -27,20 +27,14 @@
 package org.ds.satchel.processors
 
 import org.mozilla.javascript._
+import com.asual.lesscss._
 
 class LessProcessor extends SatchelProcessor with RhinoSupport {
 
-  val global = interpret("less.js")
-
+  val engine = new LessEngine()
+  
   override def process(content: String): String = {
-    val context = Context.enter
-    context.setLanguageVersion(Context.VERSION_1_5)
-    val scope = context.newObject(global)
-    scope.setParentScope(global)
-    scope.put("source", scope, content)
-    var result = context.evaluateString(scope, "compileString(source);", "less.js", 0, null).toString
-    Context.exit
-    result
+    engine.compile(content).replaceAll("\\\\n", "\n")
   }
 
     
