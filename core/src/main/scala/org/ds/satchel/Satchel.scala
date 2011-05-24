@@ -38,20 +38,31 @@ import org.ds.satchel.processors._
 object Satchel {
 
   private val map = new ConcurrentHashMap[String, Satchel]
-
   private def register(satchel: Satchel) = {
     map.put(satchel.name, satchel)
   }
-
+  
+  /**
+   * Development mode flag, disables compression and
+   * caching when set to true.
+   */
+  var devmode = true
+  
   /**
    * Find a satchel by name
    *
    * @param name	the name of the satchel
    * @return		the satchel object
    */
-  def find(name: String) = {
-    map.get(name)
-  }
+  def find(name: String) = map.get(name)
+
+  /**
+   * Determine if a satchel exists
+   *
+   * @param name	the name of the satchel
+   * @return		true if the satchel exists
+   */
+  def exists(name: String) = map.containsKey(name)
 
   def apply(name: String) = { new Satchel(name) }
 
@@ -61,24 +72,24 @@ object Satchel {
  * Represents a concatenated collection of web files.
  *
  * @param name the name of the satchel
- * 
+ *
  * @param cacheable is the satchel cacheable?  Greatly improves
  * performance
  *
  * @param root the directory path in which your files live.
  * This is used to help generate script tags, etc.
- * 
+ *
  * @param mime The type of file it is, js, css, less, coffee, jst
- * 
+ *
  * @param patterns The list of path patterns to match for finding files
  * to include in the satchel.
- * 
+ *
  * @param processors Advanced.  Add a series of processors to the pipeline, to
  * apply mutative actions to the content of each file or the satchel in it's entirety.
  */
 class Satchel(val name: String,
-              val cacheable: Boolean = false,
-              val compress: Boolean = false,
+              val cacheable: Boolean = !Satchel.devmode,
+              val compress: Boolean = !Satchel.devmode,
               val root: String = "",
               val mime: String = "js",
               var patterns: List[String] = List(),

@@ -32,7 +32,7 @@ import org.mozilla.javascript._
 //TODO: Log errors
 class CoffeeProcessor extends SatchelProcessor with RhinoSupport {
 
-  val global = build("coffee-script.js")
+  val global = interpret("coffee-script.js")
 
   override def process(content: String): String = {
     val context = Context.enter

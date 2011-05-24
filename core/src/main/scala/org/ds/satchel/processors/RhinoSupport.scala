@@ -32,7 +32,7 @@ import org.mozilla.javascript._
 //TODO: Log
 trait RhinoSupport {
     
-  protected def build(name:String): ScriptableObject = {
+  protected def interpret(name:String): ScriptableObject = {
 
     val stream = getClass().getClassLoader().getResourceAsStream(name)
     val reader = new InputStreamReader(stream, "UTF-8")

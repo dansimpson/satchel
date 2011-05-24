@@ -37,9 +37,9 @@ class JsProcessor extends SatchelProcessor {
     def error(message: String, sourceName: String, line: Int, lineSource: String, lineOffset: Int) {
 
       if (line < 0) {
-        //logger_.warn("[MINIMIZOR.WARNING] " + message);
+        
       } else {
-        //logger_.warn(String.format("[MINIMIZOR.WARNING] %1$s: %2$s: %3$s", line, lineOffset, message));
+        
       }
     }
     def runtimeError(message: String, sourceName: String, line: Int, lineSource: String, lineOffset: Int): EvaluatorException = { null }

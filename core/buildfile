@@ -1,36 +1,23 @@
+require "buildr-dependency-extensions"
 require "buildr/scala"
 
-GROUP = "org.ds"
-VERSION = "0.1"
-COPYRIGHT = "2011 Dan Simpson"
-
-
-####################
-# Dependencies
-####################
-CONFIGGY = "net.lag:configgy:jar:2.0.0"
-GRIZZLED = "org.clapper:grizzled-scala_2.8.1:jar:1.0.4"
-RHINO = "rhino:js:jar:1.7R2"
-YUI = "com.yahoo.platform.yui:yuicompressor:jar:2.4.6"
-
+Java.classpath << "src/resources"
 repositories.remote << "http://repo1.maven.org/maven2/"
 
-####################
-# Repositories
-####################
-
-Java.classpath << "src/resources"
+GRIZZLED = "org.clapper:grizzled-scala_2.8.1:jar:1.0.4"
+YUI = "com.yahoo.platform.yui:yuicompressor:jar:2.4.6"
 
 desc "satchel - asset packaging for scala"
 define "satchel" do
 
-  project.group = GROUP
-  project.version = VERSION
+  extend PomGenerator
+
+  project.group = "org.ds"
+  project.version = 0.1
   
-  manifest["Implementation-Vendor"] = COPYRIGHT
+  manifest["Copyright"] = "Dan Simpson (C) 2011"
+  manifest["Implementation-Vendor"] = "Dan Simpson"
 
-  compile.with GRIZZLED, transitive(YUI)
-
-  package :jar
-      
+  compile.with transitive(GRIZZLED), transitive(YUI)
+  run.with transitive(GRIZZLED), transitive(YUI)  
 end

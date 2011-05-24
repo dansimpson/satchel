@@ -30,7 +30,7 @@ import org.mozilla.javascript._
 
 class LessProcessor extends SatchelProcessor with RhinoSupport {
 
-  val global = build("less.js")
+  val global = interpret("less.js")
 
   override def process(content: String): String = {
     val context = Context.enter
