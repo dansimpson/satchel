@@ -1,7 +1,7 @@
 require "buildr-dependency-extensions"
 require "buildr/scala"
 
-CORE = "org.ds:satchel:jar:0.1"
+CORE = "org.ds:satchel:jar:0.2"
 SCALATRA = "org.scalatra:scalatra_2.8.1:jar:2.0.0.M3"
 
 repositories.remote << "http://repo1.maven.org/maven2/"
@@ -12,7 +12,7 @@ define "satchel-scalatra" do
   extend PomGenerator
 
   project.group = "org.ds"
-  project.version = 0.1
+  project.version = 0.2
   
   manifest["Copyright"] = "Dan Simpson (C) 2011"
   manifest["Implementation-Vendor"] = "Dan Simpson"

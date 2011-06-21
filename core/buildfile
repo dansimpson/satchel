@@ -5,7 +5,6 @@ Java.classpath << "src/resources"
 repositories.remote << "http://repo1.maven.org/maven2/"
 repositories.remote << "http://www.asual.com/maven/content/groups/public"
 
-GRIZZLED = "org.clapper:grizzled-scala_2.8.1:jar:1.0.4"
 YUI = "com.yahoo.platform.yui:yuicompressor:jar:2.4.6"
 LESSENGINE = "com.asual.lesscss:lesscss-engine:jar:1.0.43"
 
@@ -15,11 +14,11 @@ define "satchel" do
   extend PomGenerator
 
   project.group = "org.ds"
-  project.version = 0.1
+  project.version = 0.2
   
   manifest["Copyright"] = "Dan Simpson (C) 2011"
   manifest["Implementation-Vendor"] = "Dan Simpson"
 
-  compile.with transitive(GRIZZLED), transitive(YUI), transitive(LESSENGINE)
-  run.with transitive(GRIZZLED), transitive(YUI), transitive(LESSENGINE)
+  compile.with transitive(YUI), transitive(LESSENGINE)
+  run.with transitive(YUI), transitive(LESSENGINE)
 end

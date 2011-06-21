@@ -26,13 +26,15 @@
 
 package org.ds.satchel
 
+import org.ds.satchel.util.FileUtil
+
 import java.io.{ ByteArrayOutputStream, FileInputStream, IOException, File }
 import scala.util.control.Breaks._
 import scala.xml.Elem
 import java.util.concurrent.ConcurrentHashMap
 
-import grizzled.file.util
-import grizzled.file.GrizzledFile._
+//import grizzled.file.util
+//import grizzled.file.GrizzledFile._
 import org.ds.satchel.processors._
 
 object Satchel {
@@ -270,8 +272,11 @@ class Satchel(val name: String,
 
   private def glob(patterns: List[String]): List[String] = {
     patterns.map { pattern: String =>
-      util.eglob(root + "/" + pattern)
+      FileUtil.eglob(root + "/" + pattern)
+      //util.eglob(root + "/" + pattern)
     }.flatten.removeDuplicates
   }
+  
+  
 
 }
