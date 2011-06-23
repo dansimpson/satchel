@@ -35,7 +35,7 @@ object FileUtil {
     val result = new RichFile(new File(root)).tree.map(_.toString)
     
     result.filter { p =>
-      val itr = regex.findAllIn(p)
+      val itr = regex.findAllIn(p.replace('\\','/'))
       itr.size > 0
     }.toList.reverse
   }

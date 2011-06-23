@@ -33,7 +33,7 @@ class JstProcessor extends SatchelProcessor {
   	}
   	
   	override def process(path:String, content:String):String = {
-  	  "JST[\"" + path + "\"] = \"" + clean(content) + "\";";
+  	  "JST[\"" + path.replace('\\','/') + "\"] = \"" + clean(content) + "\";";
   	}
   	
   	private def clean(content:String) = {

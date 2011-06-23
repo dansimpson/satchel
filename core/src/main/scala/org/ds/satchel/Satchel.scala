@@ -267,13 +267,12 @@ class Satchel(val name: String,
    * Strip the root from the file path
    */
   private def filename(path: String): String = {
-    path.replaceFirst(root, "")
+    path.replace('\\','/').replaceFirst(root, "")
   }
 
   private def glob(patterns: List[String]): List[String] = {
     patterns.map { pattern: String =>
       FileUtil.eglob(root + "/" + pattern)
-      //util.eglob(root + "/" + pattern)
     }.flatten.removeDuplicates
   }
   
