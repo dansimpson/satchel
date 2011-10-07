@@ -235,7 +235,7 @@ class Satchel(val name: String,
         inStream.close()
       }
 
-      process(filename(file), new String(outStream.toByteArray(), "UTF8"))
+      process(filename(file), new String(outStream.toByteArray(), "UTF-8"))
     }
 
     contents.reduceLeft(_ + _)
