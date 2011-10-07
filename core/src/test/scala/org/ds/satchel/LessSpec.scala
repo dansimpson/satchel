@@ -35,7 +35,7 @@ class LessSpec extends FlatSpec with ShouldMatchers {
 
     val satchel = new Satchel(
       name = "lessy",
-      root = "tests",
+      root = "core/tests",
       mime = "less",
       compress = true,
       patterns = List("test.less"))

@@ -34,7 +34,7 @@ class JsSpec extends FlatSpec with ShouldMatchers {
   "A js satchel" should "compress js" in {
     val satchel = new Satchel(
       name = "test",
-      root = "tests",
+      root = "core/tests",
       compress = true,
       patterns = List("test.js"))
 

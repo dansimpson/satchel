@@ -35,7 +35,7 @@ class CoffeeSpec extends FlatSpec with ShouldMatchers {
 
     val satchel = new Satchel(
       name = "coffee",
-      root = "tests",
+      root = "core/tests",
       mime = "coffee",
       patterns = List("test.coffee"))
 

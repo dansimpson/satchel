@@ -34,8 +34,6 @@ class LessProcessor extends SatchelProcessor with RhinoSupport {
   val engine = new LessEngine()
   
   override def process(content: String): String = {
-    engine.compile(content).replaceAll("\\\\n", "\n")
-  }
-
-    
+    engine.compile(content).replaceAll("\\\\n", "\n")    
+  }    
 }

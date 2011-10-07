@@ -34,7 +34,7 @@ class SatchelSpec extends FlatSpec with ShouldMatchers {
   "A satchel" should "register with it's companion" in {
     new Satchel(
       name = "test",
-      root = "tests")
+      root = "core/tests")
 
     Satchel.find("test") should not be (null)
   }
@@ -42,7 +42,7 @@ class SatchelSpec extends FlatSpec with ShouldMatchers {
   "A satchel" should "handle arbitray directory depth" in {
     val satchel = new Satchel(
       name = "test",
-      root = "tests",
+      root = "core/tests",
       patterns = List("/deep/**/*.js"))
 
     satchel.assetlist should be(List("/deep/test.js", "/deep/deep/test.js", "/deep/deep/deep/test.js"))
@@ -52,7 +52,7 @@ class SatchelSpec extends FlatSpec with ShouldMatchers {
   "A satchel" should "remove duplicate files" in {
     val satchel = new Satchel(
       name = "test",
-      root = "tests",
+      root = "core/tests",
       patterns = List("/test.js", "/deep/test.js", "/test.js"))
 
     satchel.assetlist should be(List("/test.js", "/deep/test.js"))

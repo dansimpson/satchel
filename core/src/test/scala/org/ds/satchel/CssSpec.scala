@@ -34,7 +34,7 @@ class CssSpec extends FlatSpec with ShouldMatchers {
   "A css satchel" should "compress css" in {
     val satchel = new Satchel(
       name = "styles",
-      root = "tests",
+      root = "core/tests",
       mime = "css",
       compress = true,
       patterns = List("test.css"))

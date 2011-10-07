@@ -36,7 +36,8 @@ class CoffeeProcessor extends SatchelProcessor with RhinoSupport {
 
   override def process(content: String): String = {
     val context = Context.enter
-    context.setLanguageVersion(Context.VERSION_1_5)
+    context.setOptimizationLevel(-1)
+    context.setLanguageVersion(Context.VERSION_1_6)
     val scope = context.newObject(global)
     scope.setParentScope(global)
     scope.put("source", scope, content)
