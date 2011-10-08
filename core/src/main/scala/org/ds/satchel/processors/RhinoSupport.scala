@@ -28,11 +28,24 @@ package org.ds.satchel.processors
 
 import java.io._
 import org.mozilla.javascript._
+import org.mozilla.javascript.tools.shell.Global
 
 //TODO: Log
-trait RhinoSupport {
-    
-  protected def interpret(name:String): ScriptableObject = {
+
+class SatchelContextFactory extends ContextFactory {
+	override def hasFeature(context: Context, index: Int) = index match {
+	  case Context.FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER => true
+	  case Context.FEATURE_MEMBER_EXPR_AS_FUNCTION_NAME => true
+	  case Context.FEATURE_PARENT_PROTO_PROPRTIES => false
+	  case Context.FEATURE_STRICT_VARS => true
+	  case _ => super.hasFeature(context, index)
+	}
+}
+  
+trait RhinoSupport {      
+  ContextFactory.initGlobal(new SatchelContextFactory())
+  
+  protected def interpret(name:String): ScriptableObject = {		  
 
     val stream = getClass().getClassLoader().getResourceAsStream(name)
     val reader = new InputStreamReader(stream, "UTF-8")
@@ -40,7 +53,7 @@ trait RhinoSupport {
     var scope = context.initStandardObjects
     
     context.setOptimizationLevel(-1)
-   	context.setLanguageVersion(Context.VERSION_1_5)
+   	context.setLanguageVersion(Context.VERSION_1_6)
     context.evaluateReader(scope, reader, name, 0, null)
     
     Context.exit
