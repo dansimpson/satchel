@@ -38,6 +38,7 @@ class SatchelContextFactory extends ContextFactory {
 	  case Context.FEATURE_MEMBER_EXPR_AS_FUNCTION_NAME => true
 	  case Context.FEATURE_PARENT_PROTO_PROPRTIES => false
 	  case Context.FEATURE_STRICT_VARS => true
+	  case Context.FEATURE_STRICT_EVAL => true
 	  case _ => super.hasFeature(context, index)
 	}
 }
