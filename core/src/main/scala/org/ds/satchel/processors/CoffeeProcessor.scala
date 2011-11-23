@@ -31,8 +31,8 @@ import org.mozilla.javascript._
 
 //TODO: Log errors
 class CoffeeProcessor extends SatchelProcessor with RhinoSupport {
-
   lazy val global = interpret("coffee-script.js")
+
   lazy val hasNative = {
     try {
      new ProcessBuilder("coffee", "-v").start().waitFor() == 0
