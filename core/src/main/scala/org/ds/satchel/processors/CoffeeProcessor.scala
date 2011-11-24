@@ -28,6 +28,7 @@ package org.ds.satchel.processors
 
 import java.io._
 import org.mozilla.javascript._
+import scala.sys.process._
 
 //TODO: Log errors
 class CoffeeProcessor extends SatchelProcessor with RhinoSupport {
@@ -35,7 +36,7 @@ class CoffeeProcessor extends SatchelProcessor with RhinoSupport {
 
   lazy val hasNative = {
     try {
-     new ProcessBuilder("coffee", "-v").start().waitFor() == 0
+     ("coffee -v " !) == 0
     } catch {
       case e: IOException => false
     }
@@ -50,22 +51,19 @@ class CoffeeProcessor extends SatchelProcessor with RhinoSupport {
   }
   def processNative(content: String): String = {
     val tempFile = File.createTempFile("temp", ".coffee")
-    val out = new FileOutputStream(tempFile)
-    out.write(content.getBytes("UTF-8"))
-    val builder = new ProcessBuilder("coffee", "-cp", tempFile.getPath())
-    val proc = builder.start()
+    val fileOut = new FileOutputStream(tempFile)
+    fileOut.write(content.getBytes("UTF-8"))
 
-    val streamReader = new java.io.InputStreamReader(proc.getInputStream)
-    val bufferedReader = new java.io.BufferedReader(streamReader)
-    val stringBuilder = new java.lang.StringBuilder()
-    var line:String = null
-    while({line = bufferedReader.readLine; line != null}){
-      stringBuilder.append(line)
-      stringBuilder.append("\n")
-      }
-    bufferedReader.close
+    val out = new StringBuilder
+    val err = new StringBuilder
+    val logger = ProcessLogger((o: String) => out.append(o), (e: String) => err.append(e))
+
+    val result = ("coffee -cp " + tempFile.getPath ! logger)
     tempFile.delete()
-    stringBuilder.toString
+    if(result != 0) {
+      sys.error(err.toString())
+    }
+    out.toString
   }
 
   def processRhino(content: String): String = {
