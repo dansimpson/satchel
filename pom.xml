@@ -20,6 +20,7 @@
         <servlet-api.version>2.5</servlet-api.version>
         <rhino.version>1.7R3</rhino.version>
         <scalatest.version>1.4.RC2</scalatest.version>
+        <maven-source-plugin.version>2.1.2</maven-source-plugin.version>
     </properties>
 
     <modules>
@@ -107,5 +108,24 @@
             <url>http://scala-tools.org/repo-releases</url>
         </pluginRepository>
     </pluginRepositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven-source-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
