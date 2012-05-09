@@ -6,5 +6,6 @@ reports
 .project
 logs
 *.classpath
-
+*.iml
+.idea
 
