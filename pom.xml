@@ -24,8 +24,8 @@
     </properties>
 
     <modules>
-        <module>satchel-core</module>
-        <module>satchel-scalatra</module>
+        <module>core</module>
+        <module>scalatra</module>
     </modules>
 
     <dependencies>
